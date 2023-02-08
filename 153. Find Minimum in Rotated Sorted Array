@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        int ans=INT_MAX;
+        
+        int n=nums.size();
+        int s=0,e=n-1;
+        
+        while(s<=e)
+        {
+            ans=min(ans,nums[s]);
+            ans=min(ans,nums[e]);
+            s++;
+            e--;
+        }
+        return ans;
+    }
+};
