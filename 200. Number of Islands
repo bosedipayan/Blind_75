@@ -1,0 +1,37 @@
+class Solution {
+public:
+    void dfsCheck(int i,int j,vector<vector<char>>& grid,int dx[],int dy[])
+    {
+        grid[i][j]='0';
+        
+        int n=grid.size(),m=grid[0].size();
+        for(int k=0;k<4;k++)
+        {
+            int n_row=i+dx[k];
+            int n_col=j+dy[k];
+            
+            if(n_row>=0 && n_row<n && n_col>=0 && n_col<m && grid[n_row][n_col]=='1')
+            {
+                dfsCheck(n_row,n_col,grid,dx,dy);
+            }
+        }
+    }
+    int numIslands(vector<vector<char>>& grid) {
+        int ans=0;
+        
+        int dx[]={-1,0,+1,0};
+        int dy[]={0,+1,0,-1};
+        for(int i=0;i<grid.size();i++)
+        {
+            for(int j=0;j<grid[0].size();j++)
+            {
+                if(grid[i][j]=='1')
+                {
+                    dfsCheck(i,j,grid,dx,dy);
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+};
