@@ -1,0 +1,50 @@
+//  Memoization
+
+class Solution {
+public:
+    int checkrob(int i,vector<int> &res,vector<int> &dp)
+    {
+        if(i==0) return res[0];
+        if(i<0) return 0;
+        
+        if(dp[i]!=-1) return dp[i];
+        
+        int take=res[i]+checkrob(i-2,res,dp);
+        int notTake=0+checkrob(i-1,res,dp);
+        
+        return dp[i]=max(take,notTake);
+    }
+    int rob(vector<int>& res) {
+        int n=res.size();
+        vector<int> dp(n+1,-1);
+        return checkrob(n-1,res,dp);
+    }
+};
+
+
+// space optimization
+
+int rob(vector<int>& res) {
+        int n=res.size();
+        //vector<int> dp(n+1,-1);
+        //return checkrob(n-1,res,dp);
+        
+        int curr=res[0];
+        int prev=0;
+        
+        for(int i=1;i<n;i++)
+        {
+            int take=res[i];
+            if(i>1)
+            {
+                take+=prev;
+            }
+            
+            int notTake=0+curr;
+            
+            int val=max(take,notTake);
+            prev=curr;
+            curr=val;
+        }
+        return curr;
+    }
