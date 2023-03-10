@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+        int ans=0;
+        
+        sort(intervals.begin(),intervals.end());
+        int n=intervals.size();
+        
+        int c=intervals[0][1];
+        for(int i=1;i<n;i++)
+        {
+            if(c > intervals[i][0]){
+                ans+=1;
+                c=min(c,intervals[i][1]);
+            }
+            else
+            {
+                c=intervals[i][1];
+            }
+        }
+        return ans;
+    }
+};
